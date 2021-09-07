@@ -2,3 +2,4 @@
 dist/
 .vs_code
 .DS_store
+target
