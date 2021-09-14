@@ -20,6 +20,7 @@ members = [
   "examples/inner_html",
   "examples/js_callback",
   "examples/keyed_list",
+  "examples/maxlist",
   "examples/mount_point",
   "examples/multi_thread",
   "examples/nested_list",
