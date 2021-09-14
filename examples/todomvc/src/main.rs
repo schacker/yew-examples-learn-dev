@@ -57,6 +57,7 @@ impl Component for Model {
      * 属性（properties）可用于初始化组件的状态，“link”可用于注册回调或向组件发送消息。
      */
     fn create(_ctx: &Context<Self>) -> Self {
+        console::info!("create");
         let entries = LocalStorage::get(KEY).unwrap_or_else(|_| Vec::new());
         let state = State {
             entries,
@@ -73,7 +74,7 @@ impl Component for Model {
      * 消息可以由 HTML 元素监听器触发，或者由子组件，Agents，Services 或 Futures 发送。
      */
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
-        console::log!("update");
+        console::info!("update");
         match msg {
             Msg::Add(description) => {
                 if !description.is_empty() {
@@ -125,7 +126,7 @@ impl Component for Model {
      * 这个宏的行为很像 React 中的 JSX，但是使用的是 Rust 表达式而不是 JavaScript
      */
     fn view(&self, ctx: &Context<Self>) -> Html {
-        console::log!("view");
+        console::info!("view");
         let hidden_class = if self.state.entries.is_empty() {
             "hidden"
         } else {
@@ -186,7 +187,7 @@ impl Component for Model {
      * 组件通常希望实现此方法以执行只能在组件渲染元素之后才能执行的操作。如果你想在做出一些更改后重新渲染组件，返回 true 就可以了。
      */
     fn rendered(&mut self, _ctx: &Context<Self>, first_render: bool) {
-        console::log!("rendered", first_render);
+        console::info!("rendered", first_render);
         if first_render {
             if let Some(input) = self.focus_ref.cast::<InputElement>() {
                 input.focus().unwrap();
@@ -200,14 +201,14 @@ impl Component for Model {
      * 你不是必须实现 change()，但是如果想在组件被创建后通过 props 来更新组件，则可能要这么做。
      */ 
     fn changed(&mut self, _ctx: &Context<Self>) -> bool {
-        console::log!("changed");
+        console::info!("changed");
         true
     }
     /**
      * 组件从 DOM 上被卸载后，Yew 调用 destroy() 生命周期方法来支持任何必要的清理操作。这个方法是可选的，默认情况下不执行任何操作。
      */
     fn destroy(&mut self, _ctx: &Context<Self>) {
-        console::log!("destroy");
+        console::info!("destroy");
     }
 }
 /**
