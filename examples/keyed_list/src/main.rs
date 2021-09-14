@@ -137,6 +137,7 @@ impl Component for Model {
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
+        // 这里发送消息，但后续才是渲染DOM，那send_message是个异步的？
         ctx.link().send_message(Msg::Rendered(Instant::now()));
 
         html! {
